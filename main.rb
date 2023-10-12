@@ -1,39 +1,38 @@
 require './app'
 
-def main
-app = App.new
-loop do
+def display_menu
   puts 'Please choose an option by entering a number:'
-
-  puts '1 - Create Book'
-  puts '2 - Create Person'
-  puts '3 - Create Rental'
-  puts '4 - List all Books'
-  puts '5 - List all People'
-  puts '6 - List Rentals for a Person'
+  puts '1 - List all books'
+  puts '2 - List all persons'
+  puts '3 - Create a person'
+  puts '4 - Create a book'
+  puts '5 - Create a rental'
+  puts '6 - List all rentals for a given person id'
   puts '7 - Exit'
-  print ''
-  choice = gets.chomp
+  print '> '
+end
 
-  case choice
-  when '1'
-    app.create_book
-  when '2'
-    app.create_person
-  when '3'
-    app.create_rental
-  when '4'
-    app.display_books
-  when '5'
-    app.display_persons
-  when '6'
-    app.all_rentals
-  when '7'
-    puts 'Thanks for using our app. See you soon.'
-  else
-    puts 'Invalid choice. Please select a valid option.'
+# rubocop:disable Metrics/CyclomaticComplexity
+def main
+  app = App.new
+
+  loop do
+    display_menu
+    choice = gets.chomp
+
+    case choice
+    when '1' then app.display_books
+    when '2' then app.display_persons
+    when '3' then app.create_person
+    when '4' then app.create_book
+    when '5' then app.create_rental
+    when '6' then app.all_rentals
+    when '7' then break
+    else
+      puts 'Invalid choice. Please select a valid option.'
+    end
   end
 end
-end
+# rubocop:enable Metrics/CyclomaticComplexity
 
-main();
+main
