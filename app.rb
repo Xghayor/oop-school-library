@@ -114,16 +114,16 @@ class App
     display_persons
     print 'Enter the number of the person: '
     person_index = gets.chomp.to_i
-  
+
     if person_index.negative? || person_index >= @all_people.length
       puts 'Invalid person selection.'
       return
     end
-  
+
     selected_person = @all_people[person_index]
-  
+
     rentals_for_person = @all_rentals.select { |rental| rental.person == selected_person }
-  
+
     if rentals_for_person.empty?
       puts "No rentals found for #{selected_person.name}."
     else
