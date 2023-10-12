@@ -82,6 +82,7 @@ GitHub: @Xghayor<br>
   <ul>
     <li>Real-time student stats</li>
     <li>Library stats</li>
+    <li>Console app</li>
   </ul>
 </details>
 
