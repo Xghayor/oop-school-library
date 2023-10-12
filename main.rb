@@ -1,5 +1,6 @@
 require './app'
 
+def main
 app = App.new
 loop do
   puts 'Please choose an option by entering a number:'
@@ -28,8 +29,11 @@ loop do
   when '6'
     app.all_rentals
   when '7'
-    break
+    puts 'Thanks for using our app. See you soon.'
   else
     puts 'Invalid choice. Please select a valid option.'
   end
 end
+end
+
+main();
