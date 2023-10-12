@@ -58,7 +58,7 @@ class App
     print 'Specialization: '
     special = gets.chomp
 
-    teacher = Teacher.new(age, name, special)
+    teacher = Teacher.new(age, special, name)
     @all_people << teacher
     puts 'Teacher Created successfully'
   end
@@ -114,22 +114,23 @@ class App
     display_persons
     print 'Enter the number of the person: '
     person_index = gets.chomp.to_i
-
+  
     if person_index.negative? || person_index >= @all_people.length
       puts 'Invalid person selection.'
       return
     end
-
+  
     selected_person = @all_people[person_index]
-
+  
     rentals_for_person = @all_rentals.select { |rental| rental.person == selected_person }
-
+  
     if rentals_for_person.empty?
       puts "No rentals found for #{selected_person.name}."
     else
-      puts "Rentals for #{selected_person.name}:"
+      puts "ID of person #{selected_person.id}:"
       rentals_for_person.each do |rental|
-        puts "Book: #{rental.book.title}, Rental Date: #{rental.rental_date}"
+        puts 'Rentals For:'
+        puts "Book: #{rental.book.title} by #{rental.book.author} Rental Date: #{rental.date}"
       end
     end
   end
