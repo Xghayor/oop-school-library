@@ -111,7 +111,7 @@ class App
   end
 
   def all_rentals
-    display_all_people
+    display_persons
     print 'Enter the number of the person: '
     person_index = gets.chomp.to_i
 
