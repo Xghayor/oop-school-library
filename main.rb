@@ -17,7 +17,3 @@ class Menu
     gets.chomp
   end
 end
-
-# rubocop:disable Metrics/CyclomaticComplexity
-
-
