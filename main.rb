@@ -1,6 +1,6 @@
 require './app'
 
-class Menu 
+class Menu
   def display
     puts 'Please choose an option by entering a number:'
     puts '1 - List all books'
@@ -12,7 +12,7 @@ class Menu
     puts '7 - Exit'
   end
 
-  def get_choice
+  def choice
     print '> '
     gets.chomp
   end
@@ -23,12 +23,13 @@ class Main
     @app = app
   end
 
+  # rubocop:disable Metrics/CyclomaticComplexity
   def run
     menu = Menu.new
 
     loop do
       menu.display
-      choice = menu.get_choice
+      choice = menu.choice
 
       case choice
       when '1' then @app.display_books
@@ -43,6 +44,7 @@ class Main
       end
     end
   end
+  # rubocop:enable Metrics/CyclomaticComplexity
 end
 
 main = Main.new(App.new)
