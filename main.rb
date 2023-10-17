@@ -17,3 +17,33 @@ class Menu
     gets.chomp
   end
 end
+
+class Main
+  def initialize(app)
+    @app = app
+  end
+
+  def run
+    menu = Menu.new
+
+    loop do
+      menu.display
+      choice = menu.get_choice
+
+      case choice
+      when '1' then @app.display_books
+      when '2' then @app.display_persons
+      when '3' then @app.create_person
+      when '4' then @app.create_book
+      when '5' then @app.create_rental
+      when '6' then @app.all_rentals
+      when '7' then break
+      else
+        puts 'Invalid choice. Please select a valid option.'
+      end
+    end
+  end
+end
+
+main = Main.new(App.new)
+main.run
