@@ -76,6 +76,10 @@ Before running this project, make sure you have the following prerequisites inst
 
 GitHub: @Xghayor<br>
 
+👤 Agustin Soria
+
+GitHub: @SaveryIV<br>
+
 ## 🔭 Future Features <a name="future-features"></a>
 
 <details>
