@@ -51,7 +51,17 @@ class Main
     end
   end
   # rubocop:enable Metrics/CyclomaticComplexity
-
+  def save_data
+    File.open('books.json', 'w') do |file|
+      file.write(@app.all_books.to_json)
+    end
+    File.open('rentals.json', 'w') do |file|
+      file.write(@app.all_rentals.to_json)
+    end
+    File.open('persons.json', 'w') do |file|
+      file.write(@app.all_people.to_json)
+    end
+  end
   
 end
 
