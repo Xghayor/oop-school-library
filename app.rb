@@ -73,6 +73,7 @@ class App
       end
     end
   end
+  
 
   def display_persons
     @all_people.each_with_index do |p, index|

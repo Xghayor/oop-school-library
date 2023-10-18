@@ -1,5 +1,8 @@
 require './app'
+require './store'
 require 'json'
+require './load.rb'
+
 
 class Menu
   def display
@@ -20,17 +23,20 @@ class Menu
 end
 
 
-
 class Main
   def initialize(app)
     @app = app
   end
 
+
   # rubocop:disable Metrics/CyclomaticComplexity
   def run
+    DataLoader.load_books('books.json', @app.all_books)
+    DataLoader.load_people('people.json', @app.all_people)
+    DataLoader.load_rentals('rentals.json', @app.all_books, @app.all_people, @app.all_rentals)
     
     menu = Menu.new
-
+    
     loop do
       menu.display
       choice = menu.choice
@@ -43,29 +49,18 @@ class Main
       when '5' then @app.create_rental
       when '6' then @app.display_rentals
       when '7'
-        save_data
-        break 
+        storing_data = StoringData.new(@app)
+        storing_data.save_people_to_json
+        storing_data.save_books_to_json
+        storing_data.save_rentals_to_json
+        break
       else
         puts 'Invalid choice. Please select a valid option.'
       end
     end
   end
   # rubocop:enable Metrics/CyclomaticComplexity
-  def save_data
-    File.open('books.json', 'w') do |file|
-      file.write(@app.all_books.to_json)
-    end
-    File.open('rentals.json', 'w') do |file|
-      file.write(@app.all_rentals.to_json)
-    end
-    File.open('persons.json', 'w') do |file|
-      file.write(@app.all_people.to_json)
-    end
-  end
-  
 end
-
-
 
 main = Main.new(App.new)
 main.run

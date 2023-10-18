@@ -6,7 +6,12 @@ class Rental
     @book = book
     @person = person
 
-    book.rentals << self
+    if @book
+      @book.rentals << self
+    end
+
+    if @person
     person.rentals << self
+    end
   end
 end
