@@ -5,6 +5,7 @@ require './book'
 require './rental'
 
 class App
+  attr_accessor :all_books, :all_people, :all_rentals
   def initialize
     @all_books = []
     @all_people = []
@@ -110,7 +111,7 @@ class App
     puts 'Rental created'
   end
 
-  def all_rentals
+  def display_rentals
     display_persons
     print 'Enter the number of the person: '
     person_index = gets.chomp.to_i

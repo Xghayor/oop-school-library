@@ -1,4 +1,5 @@
 require './app'
+require 'json'
 
 class Menu
   def display
@@ -18,6 +19,8 @@ class Menu
   end
 end
 
+
+
 class Main
   def initialize(app)
     @app = app
@@ -25,6 +28,7 @@ class Main
 
   # rubocop:disable Metrics/CyclomaticComplexity
   def run
+    
     menu = Menu.new
 
     loop do
@@ -37,15 +41,21 @@ class Main
       when '3' then @app.create_person
       when '4' then @app.create_book
       when '5' then @app.create_rental
-      when '6' then @app.all_rentals
-      when '7' then break
+      when '6' then @app.display_rentals
+      when '7'
+        save_data
+        break 
       else
         puts 'Invalid choice. Please select a valid option.'
       end
     end
   end
   # rubocop:enable Metrics/CyclomaticComplexity
+
+  
 end
+
+
 
 main = Main.new(App.new)
 main.run
