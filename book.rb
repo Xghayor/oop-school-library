@@ -8,6 +8,16 @@ class Book
   end
 
   def add_rental(person, date)
-    Rental.new(date, self, person)
+    rental = Rental.new(self, date, person)
+    @rentals << rental
+    rental
+  end
+
+  def to_json(*_args)
+    {
+      'title' => @title,
+      'author' => @author,
+      'rentals' => @rentals.map(&:to_json)
+    }.to_json
   end
 end

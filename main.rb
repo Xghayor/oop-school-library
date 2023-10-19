@@ -1,8 +1,5 @@
 require './app'
-require './store'
 require 'json'
-require './load.rb'
-
 
 class Menu
   def display
@@ -22,21 +19,15 @@ class Menu
   end
 end
 
-
 class Main
   def initialize(app)
     @app = app
   end
 
-
   # rubocop:disable Metrics/CyclomaticComplexity
   def run
-    DataLoader.load_books('books.json', @app.all_books)
-    DataLoader.load_people('people.json', @app.all_people)
-    DataLoader.load_rentals('rentals.json', @app.all_books, @app.all_people, @app.all_rentals)
-    
     menu = Menu.new
-    
+
     loop do
       menu.display
       choice = menu.choice
@@ -48,12 +39,7 @@ class Main
       when '4' then @app.create_book
       when '5' then @app.create_rental
       when '6' then @app.display_rentals
-      when '7'
-        storing_data = StoringData.new(@app)
-        storing_data.save_people_to_json
-        storing_data.save_books_to_json
-        storing_data.save_rentals_to_json
-        break
+      when '7' then break
       else
         puts 'Invalid choice. Please select a valid option.'
       end
