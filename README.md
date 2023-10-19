@@ -137,7 +137,7 @@ This project is deployed at github pages you can clone it here. [Please click to
 
 ## Authors
 
-👤 **BGhayoor Ul Baqir**
+👤 **Ghayoor Ul Baqir**
 
 - GitHub: [@Xghayor](https://github.com/Xghayor)
 - LinkedIn: [@Ghayoor](https://www.linkedin.com/in/ghayoor-ul-baqir/)
