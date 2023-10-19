@@ -1,4 +1,4 @@
-equire 'rspec'
+require 'rspec'
 require_relative '../book.rb'
 require_relative '../rental.rb'
 require_relative '../person.rb'
