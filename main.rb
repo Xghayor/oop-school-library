@@ -1,8 +1,6 @@
 require './app'
 require 'json'
 
-
-
 class Menu
   def display
     puts 'Please choose an option by entering a number:'
@@ -51,6 +49,4 @@ class Main
 end
 
 main = Main.new(App.new)
-
-
 main.run
