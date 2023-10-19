@@ -1,4 +1,5 @@
 require './app'
+require 'json'
 
 class Menu
   def display
@@ -37,7 +38,7 @@ class Main
       when '3' then @app.create_person
       when '4' then @app.create_book
       when '5' then @app.create_rental
-      when '6' then @app.all_rentals
+      when '6' then @app.display_rentals
       when '7' then break
       else
         puts 'Invalid choice. Please select a valid option.'

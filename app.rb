@@ -3,8 +3,12 @@ require './student'
 require './teacher'
 require './book'
 require './rental'
+require 'json'
+require './store'
 
 class App
+  attr_accessor :all_books, :all_people, :all_rentals
+
   def initialize
     @all_books = []
     @all_people = []
@@ -19,6 +23,7 @@ class App
 
     book = Book.new(title, author)
     @all_books << book
+    save_data('books.json', @all_books)
     puts 'Book Created Successfully'
   end
 
@@ -47,6 +52,7 @@ class App
 
     student = Student.new(age, name, parent_permission: permission)
     @all_people << student
+    save_data('persons.json', @all_people)
     puts 'Student Created successfully'
   end
 
@@ -58,27 +64,36 @@ class App
     print 'Specialization: '
     special = gets.chomp
 
-    teacher = Teacher.new(age, special, name)
+    teacher = Teacher.new(age, name, special)
     @all_people << teacher
+    save_data('persons.json', @all_people)
     puts 'Teacher Created successfully'
   end
 
   def display_books
+    @all_books = read_data('books.json')
+
     if @all_books.empty?
       puts 'No books available.'
     else
       @all_books.each_with_index do |book, index|
-        puts "#{index}) Title: #{book.title}, Author: #{book.author}"
+        puts "#{index}) Title: #{book['title']}, Author: #{book['author']}"
       end
     end
   end
 
   def display_persons
-    @all_people.each_with_index do |p, index|
-      if p.is_a?(Student)
-        puts "#{index}) [Student] Name: #{p.name}, Age: #{p.age}"
-      elsif p.is_a?(Teacher)
-        puts "#{index}) [Teacher] Name: #{p.name}, Age: #{p.age}, Specialization: #{p.specialization}"
+    @all_people = read_data('persons.json')
+
+    if @all_people.empty?
+      puts 'No persons available.'
+    else
+      @all_people.each_with_index do |p, i|
+        if p.key?('specialization')
+          puts "#{i}) [Teacher] Name: #{p['name']}, Age: #{p['age']}, Specialization: #{p['specialization']}"
+        else
+          puts "#{i}) [Student] Name: #{p['name']}, Age: #{p['age']}"
+        end
       end
     end
   end
@@ -106,11 +121,13 @@ class App
 
     rental = Rental.new(selected_book, rental_date, selected_person)
     @all_rentals << rental
-
+    save_data('rentals.json', @all_rentals)
     puts 'Rental created'
   end
 
-  def all_rentals
+  def display_rentals
+    @all_rentals = read_data('rentals.json')
+
     display_persons
     print 'Enter the number of the person: '
     person_index = gets.chomp.to_i
@@ -122,15 +139,17 @@ class App
 
     selected_person = @all_people[person_index]
 
-    rentals_for_person = @all_rentals.select { |rental| rental.person == selected_person }
+    if selected_person.nil?
+      puts 'Selected person not found.'
+      return
+    end
 
-    if rentals_for_person.empty?
-      puts "No rentals found for #{selected_person.name}."
-    else
-      puts "ID of person #{selected_person.id}:"
-      rentals_for_person.each do |rental|
-        puts 'Rentals For:'
-        puts "Book: #{rental.book.title} by #{rental.book.author} Rental Date: #{rental.date}"
+    puts "Person ID: #{selected_person['id']}"
+
+    puts 'Rentals'
+    @all_rentals.each do |rental|
+      if rental['person_id']['id'] == selected_person['id']
+        puts "Date: #{rental['date']}, Book: \"#{rental['book']['title']}\" by #{rental['book']['author']}"
       end
     end
   end
