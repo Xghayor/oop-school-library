@@ -10,7 +10,11 @@ class Student < Person
 
   def classroom=(classroom)
     @classroom = classroom
-    classroom.add_student(self) unless classroom.students include?(self)
+    classroom.add_student(self) unless classroom.students.include?(self)
+  end
+
+  def students
+    @students
   end
 
   def to_json(*_args)

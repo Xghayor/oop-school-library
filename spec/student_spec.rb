@@ -4,8 +4,8 @@ require_relative '../classroom'
 
 describe Student do
   before :each do
-    @student = Student.new(22, 'Austin')
     @classroom = Classroom.new('Math')
+    @student = Student.new(22, 'Austin', true, @classroom)
   end
 
   it 'should add the student inside a classroom' do
