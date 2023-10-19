@@ -4,7 +4,7 @@ require_relative '../classroom'
 
 describe Classroom do
   before :each do
-    @student = Student.new(22, 'Austin')
+    @student = Student.new(22, 'Austin', true)
     @classroom = Classroom.new('Math')
   end
 
